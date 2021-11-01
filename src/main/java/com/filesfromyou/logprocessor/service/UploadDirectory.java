@@ -5,8 +5,7 @@ import java.nio.file.Paths;
 
 public enum UploadDirectory {
     SYSTEM("upload/system"),
-    DETAIL("upload/detail"),
-    ERROR("upload/error");
+    DETAIL("upload/detail");
 
     private final String path;
 

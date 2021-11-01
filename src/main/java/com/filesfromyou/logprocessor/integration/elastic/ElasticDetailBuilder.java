@@ -15,6 +15,8 @@ public class ElasticDetailBuilder extends ElasticBuilder {
         String fileUri = buildFileUri(UploadDirectory.DETAIL);
         String elasticUri = buildElasticUri(Operation.INDEX, this.indexName);
         from(fileUri)
+                .split(body().tokenize("\n"))
+                .streaming()
                 .convertBodyTo(byte[].class)
                 .to(elasticUri);
     }

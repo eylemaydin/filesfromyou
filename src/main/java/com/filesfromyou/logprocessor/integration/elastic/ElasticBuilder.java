@@ -42,6 +42,6 @@ public abstract class ElasticBuilder extends RouteBuilder {
         return "file:" +
                 directory.getPath() +
                 "?idempotent=true" +
-                String.format("&moveFailed=%s", UploadDirectory.ERROR.getPath());
+                "&moveFailed=error";
     }
 }

@@ -8,12 +8,12 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import javax.annotation.Resource;
 
 @SpringBootApplication
-public class LogprocessorApplication implements CommandLineRunner {
+public class LogProcessorApplication implements CommandLineRunner {
 	@Resource
 	FileManagementService fileManagementService;
 
 	public static void main(String[] args) {
-		SpringApplication.run(LogprocessorApplication.class, args);
+		SpringApplication.run(LogProcessorApplication.class, args);
 	}
 
 	@Override
