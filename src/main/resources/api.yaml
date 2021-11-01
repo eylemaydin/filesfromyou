@@ -1,0 +1,111 @@
+openapi: '3.0.1'
+info:
+  version: 0.0.1
+  title: 'FilesFromYou'
+
+servers:
+  - url: http://localhost:8080/api
+    description: Development server
+  - url: https://localhost:8080/api
+    description: Development server with TLS Profile
+
+paths:
+  /client/{clientId}/system:
+    post:
+      summary: Uploads client system file
+      description: This endpoint uploads system file of client
+      operationId: uploadSystemFileByClientId
+      parameters:
+        - in: path
+          name: clientId
+          schema:
+            type: integer
+          required: true
+          description: Numeric ID of the client to upload system info
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                file:
+                  type: string
+                  format: binary
+      responses:
+        "201":
+          description: Uploaded successfully!
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Response'
+        "400":
+          description: Invalid JSON!
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Response'
+        "422":
+          description: Any of the fields are not parsable!
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Response'
+  /client/{clientId}/system/{systemId}/details:
+    post:
+      summary: Uploads client log file
+      description: This endpoint uploads log file of specific system setup
+      operationId: uploadLogFileBySystemId
+      parameters:
+        - in: path
+          name: clientId
+          schema:
+            type: integer
+          required: true
+          description: Numeric ID of the client to get system info
+        - in: path
+          name: systemId
+          schema:
+            type: integer
+          required: true
+          description: Numeric ID of the system setup to upload logs
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                file:
+                  type: string
+                  format: binary
+      responses:
+        "201":
+          description: Uploaded successfully!
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Response'
+        "400":
+          description: Invalid JSON!
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Response'
+        "422":
+          description: Any of the fields are not parsable!
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Response'
+
+components:
+  schemas:
+    Response:
+      description: This is the message returns to the user
+      type: object
+      properties:
+        success:
+          type: boolean
+        message:
+          type: string
