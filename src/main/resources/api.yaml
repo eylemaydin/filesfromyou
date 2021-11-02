@@ -12,29 +12,25 @@ servers:
 paths:
   /client/{clientId}/system:
     post:
-      summary: Uploads client system file
-      description: This endpoint uploads system file of client
-      operationId: uploadSystemFileByClientId
+      summary: Saves client system information
+      description: This endpoint saves system information of client
+      operationId: saveSystemInformation
       parameters:
         - in: path
           name: clientId
           schema:
             type: integer
           required: true
-          description: Numeric ID of the client to upload system info
+          description: Client identifier
       requestBody:
         required: true
         content:
-          multipart/form-data:
+          application/json:
             schema:
-              type: object
-              properties:
-                file:
-                  type: string
-                  format: binary
+              $ref: '#/components/schemas/SystemInfo'
       responses:
         "201":
-          description: Uploaded successfully!
+          description: Saved successfully!
           content:
             application/json:
               schema:
@@ -45,30 +41,18 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Response'
-        "422":
-          description: Any of the fields are not parsable!
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Response'
-  /client/{clientId}/system/{systemId}/details:
+  /client/{clientId}/logs:
     post:
       summary: Uploads client log file
-      description: This endpoint uploads log file of specific system setup
-      operationId: uploadLogFileBySystemId
+      description: This endpoint uploads log file
+      operationId: uploadLogFile
       parameters:
         - in: path
           name: clientId
           schema:
             type: integer
           required: true
-          description: Numeric ID of the client to get system info
-        - in: path
-          name: systemId
-          schema:
-            type: integer
-          required: true
-          description: Numeric ID of the system setup to upload logs
+          description: Client identifier
       requestBody:
         required: true
         content:
@@ -109,3 +93,44 @@ components:
           type: boolean
         message:
           type: string
+    SystemInfo:
+      description: This is the dto to store system info of client
+      type: object
+      properties:
+        id:
+          type: string
+        clientId:
+          type: string
+        timestamp:
+          type: string
+        host:
+          type: object
+          properties:
+            name:
+              type: string
+            cpu:
+              type: object
+              properties:
+                name:
+                  type: string
+                cores:
+                  type: integer
+            ip:
+              type: array
+              items:
+                type: string
+            architecture:
+              type: string
+            os:
+              type: object
+              properties:
+                build:
+                  type: string
+                platform:
+                  type: string
+                version:
+                  type: string
+                name:
+                  type: string
+                kernel:
+                  type: string

@@ -4,9 +4,9 @@ import com.filesfromyou.logprocessor.service.UploadDirectory;
 import org.springframework.stereotype.Component;
 
 @Component
-public class ElasticDetailBuilder extends ElasticBuilder {
+public class AppLogBuilder extends ElasticBuilder {
 
-    private final String indexName = "clientdetaillog";
+    private final String indexName = "clientapplog";
 
     @Override
     public void configure() throws Exception {

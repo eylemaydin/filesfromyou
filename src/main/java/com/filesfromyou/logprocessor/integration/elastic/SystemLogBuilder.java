@@ -4,7 +4,7 @@ import com.filesfromyou.logprocessor.service.UploadDirectory;
 import org.springframework.stereotype.Component;
 
 @Component
-public class ElasticSystemBuilder extends ElasticBuilder {
+public class SystemLogBuilder extends ElasticBuilder {
 
     private final String indexName = "clientsystemlog";
 

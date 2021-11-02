@@ -4,8 +4,8 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 
 public enum UploadDirectory {
-    SYSTEM("upload/system"),
-    DETAIL("upload/detail");
+    SYSTEM("upload/clientsystemlog"),
+    DETAIL("upload/clientapplog");
 
     private final String path;
 
