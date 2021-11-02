@@ -1,8 +1,6 @@
 package com.filesfromyou.logprocessor.rest.impl;
 
 import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.filesfromyou.logprocessor.api.ClientApiDelegate;
 import com.filesfromyou.logprocessor.models.Response;
 import com.filesfromyou.logprocessor.models.SystemInfo;
@@ -11,10 +9,10 @@ import com.filesfromyou.logprocessor.service.UploadDirectory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
+import static com.filesfromyou.logprocessor.utils.Utility.*;
 
 
 @Service
@@ -48,36 +46,5 @@ public class ClientApiImpl implements ClientApiDelegate {
         } catch (Exception e) {
             return unsuccessfulResponse("Could not upload the file!");
         }
-    }
-
-    private ResponseEntity<Response> successfulResponse(String message) {
-        return ResponseEntity
-                .status(HttpStatus.OK)
-                .body(
-                        buildResponse(true, message)
-                );
-    }
-
-    private ResponseEntity<Response> unsuccessfulResponse(String message) {
-        return ResponseEntity
-                .status(HttpStatus.EXPECTATION_FAILED)
-                .body(
-                        buildResponse(false, message)
-                );
-    }
-
-    private Response buildResponse(boolean success, String message) {
-        Response response = new Response();
-        response.setSuccess(success);
-        response.setMessage(message);
-        return response;
-    }
-
-    private JsonNode convertToJson(Object dto) {
-        JsonNode node = new ObjectMapper().valueToTree(dto);
-        ObjectNode object = (ObjectNode) node;
-        object.set("@timestamp", node.get("timestamp"));
-        object.remove("timestamp");
-        return node;
     }
 }
