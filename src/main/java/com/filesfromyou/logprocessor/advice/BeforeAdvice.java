@@ -1,6 +1,5 @@
 package com.filesfromyou.logprocessor.advice;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.Aspect;
@@ -15,8 +14,8 @@ import org.springframework.stereotype.Component;
 public class BeforeAdvice {
     Logger log = LoggerFactory.getLogger(BeforeAdvice.class);
 
-    @Before("execution(* com.filesfromyou.*.*.*.*(..) )")
-    public void myBeforeLogger(JoinPoint joinPoint) throws JsonProcessingException {
+    @Before("within(com.filesfromyou.logprocessor..*)")
+    public void myBeforeLogger(JoinPoint joinPoint) {
         try {
             String methodName = joinPoint.getSignature().getName();
             String className = joinPoint.getTarget().getClass().toString();

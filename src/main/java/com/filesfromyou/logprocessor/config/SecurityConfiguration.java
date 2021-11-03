@@ -14,9 +14,10 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
             .disable()
             .authorizeRequests()
             .anyRequest()
-            .authenticated()
-            .and()
-            .sessionManagement()
-            .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+            .permitAll();
+            //.authenticated()
+            //.and()
+            //.sessionManagement()
+            //.sessionCreationPolicy(SessionCreationPolicy.STATELESS);
     }
 }

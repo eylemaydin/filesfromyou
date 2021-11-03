@@ -71,6 +71,13 @@
 			<artifactId>camel-elasticsearch-rest-starter</artifactId>
 			<version>3.12.0</version>
 		</dependency>
+		<dependency>
+			<groupId>org.apache.camel</groupId>
+			<artifactId>camel-test-spring-junit5</artifactId>
+			<version>3.12.0</version>
+			<scope>test</scope>
+		</dependency>
+
 
 
 	</dependencies>

@@ -1,5 +1,5 @@
 package com.filesfromyou.logprocessor.filter;
-
+/*
 import com.filesfromyou.logprocessor.util.JwtUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -23,10 +23,7 @@ public class JwtFilter extends OncePerRequestFilter {
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
         String jwt = resolveToken(request);
 
-        /**
-            Validate JWT token
-         **/
-
+        //Validate token here
 
         filterChain.doFilter(request, response);
     }
@@ -39,3 +36,4 @@ public class JwtFilter extends OncePerRequestFilter {
         return null;
     }
 }
+*/

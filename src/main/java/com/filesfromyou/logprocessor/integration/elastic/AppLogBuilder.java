@@ -6,15 +6,15 @@ import org.springframework.stereotype.Component;
 @Component
 public class AppLogBuilder extends ElasticBuilder {
 
-    private final String indexName = "clientapplog";
-    private final UploadDirectory directory = UploadDirectory.DETAIL;
+    private final String INDEX_NAME = "clientapplog";
+    private final UploadDirectory DIRECTORY = UploadDirectory.DETAIL;
 
     @Override
     public void configure() throws Exception {
         super.configureRoute();
 
-        String sourceFileUri = buildFileUri(this.directory);
-        String targetElasticUri = buildElasticUri(Operation.INDEX, this.indexName);
+        String sourceFileUri = buildFileUri(DIRECTORY);
+        String targetElasticUri = buildElasticUri(Operation.INDEX, INDEX_NAME);
         String targetFileUriForElasticFailures = buildFileUriForElasticFailures();
         from(sourceFileUri)
                 .split(body().tokenize("\n"))
@@ -29,7 +29,7 @@ public class AppLogBuilder extends ElasticBuilder {
 
     private String buildFileUriForElasticFailures() {
         return "file:" +
-                this.directory.getPath() + "/error" +
+                DIRECTORY.getPath() + "/error" +
                 "?fileExist=Append" +
                 "&appendChars=\\n";
     }

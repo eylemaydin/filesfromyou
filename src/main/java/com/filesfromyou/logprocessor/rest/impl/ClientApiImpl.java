@@ -38,12 +38,16 @@ public class ClientApiImpl implements ClientApiDelegate {
         try {
             JsonNode json = map.convertToJson(body);
             String systemInformation = json.toString();
-            String fileName = (json.get("clientId").textValue() + json.get("id").textValue()).hashCode() + ".log";
+            String fileName = generateFileName(json.get("id").textValue(), json.get("clientId").textValue());
             fileManagementService.save(systemInformation, fileName, UploadDirectory.SYSTEM);
             return response.successful("Saved system log successfully!");
         } catch (Exception e) {
             return response.unsuccessful("Could not save the system log!");
         }
+    }
+
+    public String generateFileName(String id, String clientId) {
+        return (clientId + id).hashCode() + ".log";
     }
 
     @Override

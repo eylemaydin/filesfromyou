@@ -6,14 +6,14 @@ import org.springframework.stereotype.Component;
 @Component
 public class SystemLogBuilder extends ElasticBuilder {
 
-    private final String indexName = "clientsystemlog";
+    private final String INDEX_NAME = "clientsystemlog";
 
     @Override
     public void configure() throws Exception {
         super.configureRoute();
 
         String sourceFileUri = buildFileUri(UploadDirectory.SYSTEM);
-        String targetElasticUri = buildElasticUri(Operation.INDEX, this.indexName);
+        String targetElasticUri = buildElasticUri(Operation.INDEX, INDEX_NAME);
         from(sourceFileUri)
                 .convertBodyTo(byte[].class)
                 .to(targetElasticUri);
