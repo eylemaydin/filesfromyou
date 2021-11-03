@@ -1,6 +1,6 @@
 package com.filesfromyou.logprocessor.integration.elastic;
 
-import com.filesfromyou.logprocessor.service.UploadDirectory;
+import com.filesfromyou.logprocessor.service.filemanager.UploadDirectory;
 import org.apache.camel.CamelContext;
 import org.apache.camel.builder.RouteBuilder;
 import org.apache.camel.component.elasticsearch.ElasticsearchComponent;

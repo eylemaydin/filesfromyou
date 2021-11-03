@@ -1,4 +1,4 @@
-package com.filesfromyou.logprocessor.service;
+package com.filesfromyou.logprocessor.service.filemanager;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;

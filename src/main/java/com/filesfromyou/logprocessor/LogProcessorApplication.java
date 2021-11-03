@@ -1,6 +1,6 @@
 package com.filesfromyou.logprocessor;
 
-import com.filesfromyou.logprocessor.service.FileManagementService;
+import com.filesfromyou.logprocessor.service.filemanager.FileManagementService;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

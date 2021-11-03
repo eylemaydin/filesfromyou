@@ -1,7 +1,6 @@
 package com.filesfromyou.logprocessor.integration.elastic;
 
-import com.filesfromyou.logprocessor.service.UploadDirectory;
-import org.apache.camel.Exchange;
+import com.filesfromyou.logprocessor.service.filemanager.UploadDirectory;
 import org.springframework.stereotype.Component;
 
 @Component
