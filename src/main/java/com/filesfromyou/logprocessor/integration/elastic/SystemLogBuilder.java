@@ -12,10 +12,10 @@ public class SystemLogBuilder extends ElasticBuilder {
     public void configure() throws Exception {
         super.configureRoute();
 
-        String fileUri = buildFileUri(UploadDirectory.SYSTEM);
-        String elasticUri = buildElasticUri(Operation.INDEX, this.indexName);
-        from(fileUri)
+        String sourceFileUri = buildFileUri(UploadDirectory.SYSTEM);
+        String targetElasticUri = buildElasticUri(Operation.INDEX, this.indexName);
+        from(sourceFileUri)
                 .convertBodyTo(byte[].class)
-                .to(elasticUri);
+                .to(targetElasticUri);
     }
 }

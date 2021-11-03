@@ -30,9 +30,13 @@ public abstract class ElasticBuilder extends RouteBuilder {
         ElasticsearchComponent elasticsearchComponent = new ElasticsearchComponent();
         elasticsearchComponent.setHostAddresses(this.hostAddress);
 
-        if (camelContext.hasComponent("elasticsearch-rest") == null) {
+        if (!hasElasticComponent()) {
             camelContext.addComponent("elasticsearch-rest", elasticsearchComponent);
         }
+    }
+
+    private boolean hasElasticComponent() {
+        return camelContext.hasComponent("elasticsearch-rest") != null;
     }
 
     String buildElasticUri(Operation operation, String indexName) {
