@@ -2,6 +2,7 @@ package com.filesfromyou.logprocessor.rest.impl;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.filesfromyou.logprocessor.api.ClientApiDelegate;
+import com.filesfromyou.logprocessor.exception.InvalidClientException;
 import com.filesfromyou.logprocessor.models.Response;
 import com.filesfromyou.logprocessor.models.SystemInfo;
 import com.filesfromyou.logprocessor.service.filemanager.*;
@@ -25,6 +26,7 @@ public class ClientApiImpl implements ClientApiDelegate {
     @Override
     public ResponseEntity<Response> saveSystemInformation(SystemInfo body, Integer clientId) {
         log.info("REST request to upload system file");
+        validateClient(clientId);
         try {
             JsonNode json = convertToJson(body);
             String systemInformation = json.toString();
@@ -39,11 +41,23 @@ public class ClientApiImpl implements ClientApiDelegate {
     @Override
     public ResponseEntity<Response> uploadLogFile(MultipartFile file, Integer clientId) {
         log.info("REST request to upload log file");
+        validateClient(clientId);
         try {
             fileManagementService.save(file, UploadDirectory.DETAIL);
             return successfulResponse("Uploaded the file successfully!");
         } catch (Exception e) {
             return unsuccessfulResponse("Could not upload the file!");
         }
+    }
+
+    private void validateClient(Integer clientId) throws InvalidClientException {
+        if (!isClientValid(clientId)) {
+            throw new InvalidClientException();
+        }
+    }
+
+    private boolean isClientValid(Integer clientId) {
+        //Check client if it is valid or not
+        return true;
     }
 }
