@@ -1,5 +1,6 @@
 package com.filesfromyou.logprocessor.advice;
 
+import com.filesfromyou.logprocessor.exception.FileUploadException;
 import com.filesfromyou.logprocessor.models.Response;
 import com.filesfromyou.logprocessor.util.ResponseUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,5 +19,10 @@ public class FileUploadExceptionAdvice extends ResponseEntityExceptionHandler {
     @ExceptionHandler(MaxUploadSizeExceededException.class)
     public ResponseEntity<Response> handleMaxSizeException(MaxUploadSizeExceededException exc) {
         return response.unsuccessful("File too large!");
+    }
+
+    @ExceptionHandler(FileUploadException.class)
+    public ResponseEntity<Response> handleFileUploadException(FileUploadException exc) {
+        return response.unsuccessful("Could not upload the file!");
     }
 }

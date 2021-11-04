@@ -1,0 +1,21 @@
+{
+	"id": "3da5b52a-1387-4e93-b197-91db5f001047",
+	"clientId": "05846552-4fe2-491d-b5ab-86e734be3250",
+	"@timestamp": "2021-11-01T15:31:42.660Z",
+	"host": {
+		"cpu": {
+			"name": "Intel(R) Core(TM) i7-6500U CPU @ 2.50GHz",
+			"cores": 4
+		},
+		"name": "LAPTOP-7LTDASLV",
+		"ip": ["fe80::e81d:ab77:d849:a40", "169.254.10.64", "fe80::981c:f496:a5a8:2730", "169.254.39.48", "fe80::491d:26ed:8b04:6393", "169.254.99.147", "fe80::c479:e0a:e6ad:cca5", "169.254.204.165", "fe80::a95d:57b0:1c3f:d14b", "192.168.1.104"],
+		"architecture": "x86_64",
+		"os": {
+			"build": "19042.1288",
+			"platform": "windows",
+			"version": "10.0",
+			"name": "Windows 10 Home",
+			"kernel": "10.0.19041.1288 (WinBuild.160101.0800)"
+		}
+	}
+}

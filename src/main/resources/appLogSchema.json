@@ -1,0 +1,227 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema",
+    "$id": "http://example.com/example.json",
+    "type": "object",
+    "title": "The root schema",
+    "description": "The root schema comprises the entire JSON document.",
+    "default": {},
+    "examples": [
+        {
+            "id": "595cd290-0866-4cd6-9ece-a7344d64601a",
+            "clientId": "05846552-4fe2-491d-b5ab-86e734be3250",
+            "systemId": "3da5b52a-1387-4e93-b197-91db5f001083",
+            "@timestamp": "2021-11-01T20:23:42.660Z",
+            "invocation": {
+                "function": "class com.filesfromyou.client.indexer.IndexManager: init()",
+                "parameters": "[]"
+            },
+            "metrics": {
+                "cpu": {
+                    "processCpuLoad": 0.125,
+                    "systemCpuLoad": 0.248
+                },
+                "memory": {
+                    "totalPhysicalMemorySize": 8457711616,
+                    "freePhysicalMemorySize": 951361536
+                }
+            }
+        }
+    ],
+    "required": [
+        "id",
+        "clientId",
+        "systemId",
+        "@timestamp",
+        "invocation",
+        "metrics"
+    ],
+    "properties": {
+        "id": {
+            "$id": "#/properties/id",
+            "type": "string",
+            "title": "The id schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": "",
+            "examples": [
+                "595cd290-0866-4cd6-9ece-a7344d64601a"
+            ]
+        },
+        "clientId": {
+            "$id": "#/properties/clientId",
+            "type": "string",
+            "title": "The clientId schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": "",
+            "examples": [
+                "05846552-4fe2-491d-b5ab-86e734be3250"
+            ]
+        },
+        "systemId": {
+            "$id": "#/properties/systemId",
+            "type": "string",
+            "title": "The systemId schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": "",
+            "examples": [
+                "3da5b52a-1387-4e93-b197-91db5f001083"
+            ]
+        },
+        "@timestamp": {
+            "$id": "#/properties/%40timestamp",
+            "type": "string",
+            "title": "The @timestamp schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": "",
+            "examples": [
+                "2021-11-01T20:23:42.660Z"
+            ]
+        },
+        "invocation": {
+            "$id": "#/properties/invocation",
+            "type": "object",
+            "title": "The invocation schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": {},
+            "examples": [
+                {
+                    "function": "class com.filesfromyou.client.indexer.IndexManager: init()",
+                    "parameters": "[]"
+                }
+            ],
+            "required": [
+                "function",
+                "parameters"
+            ],
+            "properties": {
+                "function": {
+                    "$id": "#/properties/invocation/properties/function",
+                    "type": "string",
+                    "title": "The function schema",
+                    "description": "An explanation about the purpose of this instance.",
+                    "default": "",
+                    "examples": [
+                        "class com.filesfromyou.client.indexer.IndexManager: init()"
+                    ]
+                },
+                "parameters": {
+                    "$id": "#/properties/invocation/properties/parameters",
+                    "type": "string",
+                    "title": "The parameters schema",
+                    "description": "An explanation about the purpose of this instance.",
+                    "default": "",
+                    "examples": [
+                        "[]"
+                    ]
+                }
+            },
+            "additionalProperties": true
+        },
+        "metrics": {
+            "$id": "#/properties/metrics",
+            "type": "object",
+            "title": "The metrics schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": {},
+            "examples": [
+                {
+                    "cpu": {
+                        "processCpuLoad": 0.125,
+                        "systemCpuLoad": 0.248
+                    },
+                    "memory": {
+                        "totalPhysicalMemorySize": 8457711616,
+                        "freePhysicalMemorySize": 951361536
+                    }
+                }
+            ],
+            "required": [
+                "cpu",
+                "memory"
+            ],
+            "properties": {
+                "cpu": {
+                    "$id": "#/properties/metrics/properties/cpu",
+                    "type": "object",
+                    "title": "The cpu schema",
+                    "description": "An explanation about the purpose of this instance.",
+                    "default": {},
+                    "examples": [
+                        {
+                            "processCpuLoad": 0.125,
+                            "systemCpuLoad": 0.248
+                        }
+                    ],
+                    "required": [
+                        "processCpuLoad",
+                        "systemCpuLoad"
+                    ],
+                    "properties": {
+                        "processCpuLoad": {
+                            "$id": "#/properties/metrics/properties/cpu/properties/processCpuLoad",
+                            "type": "number",
+                            "title": "The processCpuLoad schema",
+                            "description": "An explanation about the purpose of this instance.",
+                            "default": 0.0,
+                            "examples": [
+                                0.125
+                            ]
+                        },
+                        "systemCpuLoad": {
+                            "$id": "#/properties/metrics/properties/cpu/properties/systemCpuLoad",
+                            "type": "number",
+                            "title": "The systemCpuLoad schema",
+                            "description": "An explanation about the purpose of this instance.",
+                            "default": 0.0,
+                            "examples": [
+                                0.248
+                            ]
+                        }
+                    },
+                    "additionalProperties": true
+                },
+                "memory": {
+                    "$id": "#/properties/metrics/properties/memory",
+                    "type": "object",
+                    "title": "The memory schema",
+                    "description": "An explanation about the purpose of this instance.",
+                    "default": {},
+                    "examples": [
+                        {
+                            "totalPhysicalMemorySize": 8457711616,
+                            "freePhysicalMemorySize": 951361536
+                        }
+                    ],
+                    "required": [
+                        "totalPhysicalMemorySize",
+                        "freePhysicalMemorySize"
+                    ],
+                    "properties": {
+                        "totalPhysicalMemorySize": {
+                            "$id": "#/properties/metrics/properties/memory/properties/totalPhysicalMemorySize",
+                            "type": "integer",
+                            "title": "The totalPhysicalMemorySize schema",
+                            "description": "An explanation about the purpose of this instance.",
+                            "default": 0,
+                            "examples": [
+                                8457711616
+                            ]
+                        },
+                        "freePhysicalMemorySize": {
+                            "$id": "#/properties/metrics/properties/memory/properties/freePhysicalMemorySize",
+                            "type": "integer",
+                            "title": "The freePhysicalMemorySize schema",
+                            "description": "An explanation about the purpose of this instance.",
+                            "default": 0,
+                            "examples": [
+                                951361536
+                            ]
+                        }
+                    },
+                    "additionalProperties": true
+                }
+            },
+            "additionalProperties": true
+        }
+    },
+    "additionalProperties": true
+}

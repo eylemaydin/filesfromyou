@@ -12,9 +12,12 @@ import com.filesfromyou.logprocessor.util.ResponseUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
+
+import java.nio.file.Path;
 
 
 @Service
@@ -31,6 +34,12 @@ public class ClientApiImpl implements ClientApiDelegate {
     @Autowired
     MapUtil map;
 
+    @Value("${logprocessor.folder.clientapplog}")
+    private String appLogFolder;
+
+    @Value("${logprocessor.folder.clientsystemlog}")
+    private String systemLogFolder;
+
     @Override
     public ResponseEntity<Response> saveSystemInformation(SystemInfo body, Integer clientId) {
         log.info("REST request to upload system file");
@@ -38,16 +47,12 @@ public class ClientApiImpl implements ClientApiDelegate {
         try {
             JsonNode json = map.convertToJson(body);
             String systemInformation = json.toString();
-            String fileName = generateFileName(json.get("id").textValue(), json.get("clientId").textValue());
-            fileManagementService.save(systemInformation, fileName, UploadDirectory.SYSTEM);
+            String fileName = (json.get("clientId").textValue() + json.get("id").textValue()).hashCode() + ".log";
+            fileManagementService.save(systemInformation, fileName, Path.of(this.systemLogFolder));
             return response.successful("Saved system log successfully!");
         } catch (Exception e) {
             return response.unsuccessful("Could not save the system log!");
         }
-    }
-
-    public String generateFileName(String id, String clientId) {
-        return (clientId + id).hashCode() + ".log";
     }
 
     @Override
@@ -55,7 +60,7 @@ public class ClientApiImpl implements ClientApiDelegate {
         log.info("REST request to upload log file");
         validateClient(clientId);
         try {
-            fileManagementService.save(file, UploadDirectory.DETAIL);
+            fileManagementService.save(file, Path.of(this.appLogFolder));
             return response.successful("Uploaded the file successfully!");
         } catch (Exception e) {
             return response.unsuccessful("Could not upload the file!");

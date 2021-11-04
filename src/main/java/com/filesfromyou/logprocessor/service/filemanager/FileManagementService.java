@@ -1,7 +1,9 @@
 package com.filesfromyou.logprocessor.service.filemanager;
 
+import com.filesfromyou.logprocessor.exception.FileUploadException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -9,9 +11,13 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.*;
+import java.util.List;
 
 @Service
 public class FileManagementService {
+
+    @Value("#{'${logprocessor.folders}'.split(';')}")
+    private List<String> folders;
 
     Logger log = LoggerFactory.getLogger(FileManagementService.class);
 
@@ -23,8 +29,8 @@ public class FileManagementService {
     public void createUploadDirectories() {
         log.info("Creating upload directories");
         try {
-            for (UploadDirectory directory : UploadDirectory.values()) {
-                Files.createDirectories(directory.getPath());
+            for (String folder : folders) {
+                Files.createDirectories(Path.of(folder));
             }
         } catch (IOException e) {
             log.error("IOException: " + e.getMessage());
@@ -35,13 +41,14 @@ public class FileManagementService {
     public void retryProcessingFiles() {
         log.info("Moving directories to re-process again");
         try {
-            for (UploadDirectory directory : UploadDirectory.values()) {
-                File[] listOfFiles = directory.getPath().resolve("error").toFile().listFiles();
+            for (String folder : folders) {
+                Path folderPath = Path.of(folder);
+                File[] listOfFiles = folderPath.resolve("error").toFile().listFiles();
                 if (listOfFiles != null) {
                     for (File child : listOfFiles ) {
-                        child.renameTo(new File(directory.getPath() + "\\" + child.getName()));
+                        child.renameTo(new File(folderPath + "\\" + child.getName()));
                     }
-                    directory.getPath().resolve("error").toFile().delete();
+                    folderPath.resolve("error").toFile().delete();
                 }
             }
         } catch (Exception e) {
@@ -50,32 +57,32 @@ public class FileManagementService {
         }
     }
 
-    public void save(MultipartFile file, UploadDirectory directory) {
+    public void save(MultipartFile file, Path filePath) {
         log.info("Saving " + file.getOriginalFilename());
         try {
             InputStream source = file.getInputStream();
-            Path targetPath = directory.getPath().resolve(file.getOriginalFilename());
+            Path targetPath = filePath.resolve(file.getOriginalFilename());
             Files.copy(source, targetPath, StandardCopyOption.REPLACE_EXISTING);
         } catch (FileAlreadyExistsException feEx) {
             log.error("FileAlreadyExistsException: " + feEx.getMessage());
-            throw new RuntimeException("Could not save the file");
+            throw new FileUploadException();
         } catch (IOException ioEx) {
             log.error("IOException: " + ioEx.getMessage());
-            throw new RuntimeException("Could not save the file");
+            throw new FileUploadException();
         }
     }
 
-    public void save(String fileContent, String fileName, UploadDirectory directory) {
+    public void save(String fileContent, String fileName, Path filePath) {
         log.info("Saving " + fileName);
         try {
-            Path targetPath = directory.getPath().resolve(fileName);
+            Path targetPath = filePath.resolve(fileName);
             Files.writeString(targetPath, fileContent);
         } catch (FileAlreadyExistsException feEx) {
             log.error("FileAlreadyExistsException: " + feEx.getMessage());
-            throw new RuntimeException("Could not save the file");
+            throw new FileUploadException();
         } catch (IOException ioEx) {
             log.error("IOException: " + ioEx.getMessage());
-            throw new RuntimeException("Could not save the file");
+            throw new FileUploadException();
         }
     }
 }
